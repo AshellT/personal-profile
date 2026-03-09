@@ -26,6 +26,12 @@ dist-ssr
 # git
 .git
 
-# env
+# env / secrets
 .env
+.env.*
+!.env.example
+.envrc
+.secrets
+*.pem
+*.key
 

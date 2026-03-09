@@ -21,10 +21,6 @@ import {
   nodejs,
   mongodb,
   git,
-  meta,
-  starbucks,
-  tesla,
-  shopify,
   carrent,
   jobit,
   tripguide,
@@ -120,7 +116,7 @@ const experiences: TExperience[] = [
   {
     title: "Projects System Developer",
     companyName: "OmniContact [ECONET] - Harare",
-    icon: meta,
+    icon: web,
     iconBg: "#DBEAFE",
     date: "Mar 2025 - Present",
     points: [
@@ -133,8 +129,8 @@ const experiences: TExperience[] = [
   {
     title: "HR System Developer",
     companyName: "OmniContact [ECONET] - Harare",
-    icon: tesla,
-    iconBg: "#FEF3C7",
+    icon: backend,
+    iconBg: "#E0E7FF",
     date: "Mar 2024 - Feb 2025",
     points: [
       "Developed and maintained a tailored HR management platform to improve employee data accessibility and accuracy.",
@@ -146,7 +142,7 @@ const experiences: TExperience[] = [
   {
     title: "Technical Support (Part-Time)",
     companyName: "Prometric - Harare",
-    icon: shopify,
+    icon: mobile,
     iconBg: "#DCFCE7",
     date: "Aug 2023 - Jul 2024",
     points: [
@@ -159,8 +155,8 @@ const experiences: TExperience[] = [
   {
     title: "Technical Support Engineer",
     companyName: "OmniContact [ECONET] - Harare",
-    icon: starbucks,
-    iconBg: "#FEE2E2",
+    icon: backend,
+    iconBg: "#E0F2FE",
     date: "Apr 2024 - Mar 2024",
     points: [
       "Provided support for inbound and outbound systems to minimize downtime and improve reliability.",
@@ -172,8 +168,8 @@ const experiences: TExperience[] = [
   {
     title: "Call Centre Agent",
     companyName: "OmniContact [ECONET] - Harare",
-    icon: meta,
-    iconBg: "#E0F2FE",
+    icon: creator,
+    iconBg: "#FEF3C7",
     date: "Aug 2022 - Mar 2023",
     points: [
       "Handled high volumes of inbound customer calls while maintaining service quality.",
@@ -185,7 +181,7 @@ const experiences: TExperience[] = [
   {
     title: "Technical Support",
     companyName: "Liquid Intelligent Technologies - Harare",
-    icon: tesla,
+    icon: mobile,
     iconBg: "#EDE9FE",
     date: "May 2022 - Jul 2022",
     points: [
@@ -198,7 +194,7 @@ const experiences: TExperience[] = [
   {
     title: "Technical Support",
     companyName: "Wicresoft - Shanghai, China",
-    icon: shopify,
+    icon: mobile,
     iconBg: "#FFEDD5",
     date: "Jul 2021 - Dec 2021",
     points: [
