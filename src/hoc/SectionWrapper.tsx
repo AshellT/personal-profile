@@ -14,7 +14,7 @@ const SectionWrapper = (
   function HOC() {
     return (
       <motion.section
-        initial="hidden"
+        initial="show"
         whileInView="show"
         viewport={{ once: true, amount: 0.25 }}
         className={`${styles.padding} relative z-0 mx-auto max-w-7xl`}
