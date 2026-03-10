@@ -1,9 +1,11 @@
 import { motion } from "framer-motion";
+import { lazy, Suspense } from "react";
 
 import { styles } from "../../constants/styles";
-import { ComputersCanvas } from "../canvas";
 import { config } from "../../constants/config";
 import { github } from "../../assets";
+
+const ComputersCanvas = lazy(() => import("../canvas/Computers"));
 
 const Hero = () => {
   return (
@@ -72,7 +74,9 @@ const Hero = () => {
       </div>
 
       <div className="absolute inset-0 z-0">
-        <ComputersCanvas />
+        <Suspense fallback={null}>
+          <ComputersCanvas />
+        </Suspense>
       </div>
 
       <div className="xs:bottom-10 absolute bottom-32 z-20 flex w-full items-center justify-center">

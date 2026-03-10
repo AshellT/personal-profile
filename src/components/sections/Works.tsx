@@ -31,6 +31,8 @@ const ProjectCard: React.FC<{ index: number } & TProject> = ({
             <img
               src={image}
               alt={name}
+              loading="lazy"
+              decoding="async"
               className="h-full w-full rounded-2xl object-cover"
             />
             <div className="card-img_hover absolute inset-0 m-3 flex justify-end">

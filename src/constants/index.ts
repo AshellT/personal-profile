@@ -157,7 +157,7 @@ const experiences: TExperience[] = [
     companyName: "OmniContact [ECONET] - Harare",
     icon: backend,
     iconBg: "#E0F2FE",
-    date: "Apr 2024 - Mar 2024",
+    date: "Apr 2023 - Mar 2024",
     points: [
       "Provided support for inbound and outbound systems to minimize downtime and improve reliability.",
       "Delivered training and documentation for support teams and end-users.",
