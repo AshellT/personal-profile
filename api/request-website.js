@@ -73,7 +73,7 @@ function templateForType(type) {
   return templates[type] || templates["business-website"];
 }
 
-function buildOwnerEmailHtml({ name, email, message, requestType }) {
+function buildOwnerEmailHtml({ name, email, whatsapp, message, requestType }) {
   const selected = templateForType(requestType);
   return `
   <div style="margin:0;padding:0;background:#050b18;font-family:Inter,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:#e2e8f0;">
@@ -100,6 +100,10 @@ function buildOwnerEmailHtml({ name, email, message, requestType }) {
                   <tr>
                     <td style="width:130px;color:#93c5fd;font-size:13px;font-weight:700;vertical-align:top;">Email</td>
                     <td style="font-size:15px;color:#f8fafc;">${escapeHtml(email)}</td>
+                  </tr>
+                  <tr>
+                    <td style="width:130px;color:#93c5fd;font-size:13px;font-weight:700;vertical-align:top;">WhatsApp</td>
+                    <td style="font-size:15px;color:#f8fafc;">${escapeHtml(whatsapp || "Not provided")}</td>
                   </tr>
                   <tr>
                     <td style="width:130px;color:#93c5fd;font-size:13px;font-weight:700;vertical-align:top;">Request type</td>
@@ -166,13 +170,14 @@ function buildAutoReplyHtml({ name, message, requestType }) {
   </div>`;
 }
 
-function buildOwnerEmailText({ name, email, message, requestType }) {
+function buildOwnerEmailText({ name, email, whatsapp, message, requestType }) {
   const selected = templateForType(requestType);
   return [
     "New client inquiry received",
     "",
     `Name: ${name}`,
     `Email: ${email}`,
+    `WhatsApp: ${whatsapp || "Not provided"}`,
     `Request type: ${selected.label}`,
     "",
     "Project Brief:",
@@ -230,7 +235,7 @@ export default async function handler(req, res) {
     });
   }
 
-  const { name, email, message, requestType } = parseBody(req);
+  const { name, email, whatsapp, message, requestType } = parseBody(req);
 
   const normalizedRequestType = inferRequestType(requestType, message);
   const selectedTemplate = templateForType(normalizedRequestType);
@@ -251,12 +256,14 @@ export default async function handler(req, res) {
         html: buildOwnerEmailHtml({
           name,
           email,
+          whatsapp,
           message,
           requestType: normalizedRequestType,
         }),
         text: buildOwnerEmailText({
           name,
           email,
+          whatsapp,
           message,
           requestType: normalizedRequestType,
         }),

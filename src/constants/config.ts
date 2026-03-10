@@ -24,6 +24,10 @@ type TConfig = {
         span: string;
         placeholder: string;
       };
+      whatsapp: {
+        span: string;
+        placeholder: string;
+      };
       message: {
         span: string;
         placeholder: string;
@@ -60,6 +64,10 @@ export const config: TConfig = {
         placeholder: "Tell me your name",
       },
       email: { span: "Your Email", placeholder: "Where can I reach you?" },
+      whatsapp: {
+        span: "WhatsApp Number",
+        placeholder: "e.g. +263 77 123 4567",
+      },
       message: {
         span: "Project Brief",
         placeholder: "Describe your project, goals, and timeline",
