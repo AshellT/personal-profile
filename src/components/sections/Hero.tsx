@@ -1,11 +1,10 @@
 import { motion } from "framer-motion";
-import { lazy, Suspense } from "react";
+import { Suspense } from "react";
 
 import { styles } from "../../constants/styles";
 import { config } from "../../constants/config";
 import { github } from "../../assets";
-
-const ComputersCanvas = lazy(() => import("../canvas/Computers"));
+import ComputersCanvas from "../canvas/Computers";
 
 const Hero = () => {
   return (
@@ -73,11 +72,14 @@ const Hero = () => {
         </div>
       </div>
 
-      <div className="pointer-events-none absolute inset-0 z-0">
+      <div className="pointer-events-none absolute inset-0 z-0 translate-y-16 opacity-85 md:translate-y-0 md:opacity-100">
         <Suspense fallback={null}>
           <ComputersCanvas />
         </Suspense>
       </div>
+
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-40 bg-gradient-to-t from-[#030712] via-[#030712]/80 to-transparent" />
+      <div className="pointer-events-none absolute inset-x-0 top-0 z-10 h-24 bg-gradient-to-b from-[#030712]/90 to-transparent" />
 
       <div className="xs:bottom-10 absolute bottom-32 z-20 flex w-full items-center justify-center">
         <a href="#about">

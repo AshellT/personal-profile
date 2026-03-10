@@ -14,15 +14,13 @@ const Computers: React.FC<{ isMobile: boolean }> = ({ isMobile }) => {
         position={[-20, 50, 10]}
         angle={0.12}
         penumbra={1}
-        intensity={1}
-        castShadow
-        shadow-mapSize={1024}
+        intensity={isMobile ? 0.8 : 1}
       />
-      <pointLight intensity={1} />
+      <pointLight intensity={isMobile ? 0.75 : 1} />
       <primitive
         object={computer.scene}
-        scale={isMobile ? 0.7 : 0.75}
-        position={isMobile ? [0, -3, -2.2] : [0, -4.25, -1.5]}
+        scale={isMobile ? 0.56 : 0.75}
+        position={isMobile ? [0, -4.65, -2.2] : [0, -4.25, -1.5]}
         rotation={[-0.01, -0.2, -0.1]}
       />
     </mesh>
@@ -56,15 +54,16 @@ const ComputersCanvas = () => {
   return (
     <Canvas
       frameloop="demand"
-      shadows={!isMobile}
-      dpr={isMobile ? [1, 1.25] : [1, 1.5]}
-      camera={{ position: [20, 3, 5], fov: 25 }}
+      shadows={false}
+      dpr={isMobile ? [1, 1.1] : [1, 1.4]}
+      camera={{ position: isMobile ? [18, 2.5, 5.8] : [20, 3, 5], fov: 25 }}
+      gl={{ antialias: !isMobile, powerPreference: "high-performance" }}
     >
       <Suspense fallback={<CanvasLoader />}>
         <OrbitControls
           enablePan={false}
           enableZoom={false}
-          enableRotate={!isMobile}
+          enableRotate={false}
           maxPolarAngle={Math.PI / 2}
           minPolarAngle={Math.PI / 2}
         />
@@ -73,5 +72,7 @@ const ComputersCanvas = () => {
     </Canvas>
   );
 };
+
+useGLTF.preload("./desktop_pc/scene.gltf");
 
 export default ComputersCanvas;
