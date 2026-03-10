@@ -34,7 +34,7 @@ const ComputersCanvas = () => {
 
   useEffect(() => {
     // Add a listener for changes to the screen size
-    const mediaQuery = window.matchMedia("(max-width: 500px)");
+    const mediaQuery = window.matchMedia("(max-width: 767px)");
 
     // Set the initial value of the `isMobile` state variable
     setIsMobile(mediaQuery.matches);
@@ -54,28 +54,23 @@ const ComputersCanvas = () => {
   }, []);
 
   return (
-    <>
-      {isMobile ? (
-        <></>
-      ) : (
-        <Canvas
-          frameloop="demand"
-          shadows
-          dpr={[1, 1.5]}
-          camera={{ position: [20, 3, 5], fov: 25 }}
-        >
-          <Suspense fallback={<CanvasLoader />}>
-            <OrbitControls
-              enablePan={false}
-              enableZoom={false}
-              maxPolarAngle={Math.PI / 2}
-              minPolarAngle={Math.PI / 2}
-            />
-            <Computers isMobile={isMobile} />
-          </Suspense>
-        </Canvas>
-      )}
-    </>
+    <Canvas
+      frameloop="demand"
+      shadows={!isMobile}
+      dpr={isMobile ? [1, 1.25] : [1, 1.5]}
+      camera={{ position: [20, 3, 5], fov: 25 }}
+    >
+      <Suspense fallback={<CanvasLoader />}>
+        <OrbitControls
+          enablePan={false}
+          enableZoom={false}
+          enableRotate={!isMobile}
+          maxPolarAngle={Math.PI / 2}
+          minPolarAngle={Math.PI / 2}
+        />
+        <Computers isMobile={isMobile} />
+      </Suspense>
+    </Canvas>
   );
 };
 

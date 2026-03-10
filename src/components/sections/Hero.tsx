@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { lazy, Suspense, useEffect, useState } from "react";
+import { lazy, Suspense } from "react";
 
 import { styles } from "../../constants/styles";
 import { config } from "../../constants/config";
@@ -8,20 +8,6 @@ import { github } from "../../assets";
 const ComputersCanvas = lazy(() => import("../canvas/Computers"));
 
 const Hero = () => {
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const mediaQuery = window.matchMedia("(max-width: 767px)");
-    setIsMobile(mediaQuery.matches);
-
-    const handleMediaQueryChange = (event: MediaQueryListEvent) => {
-      setIsMobile(event.matches);
-    };
-
-    mediaQuery.addEventListener("change", handleMediaQueryChange);
-    return () => mediaQuery.removeEventListener("change", handleMediaQueryChange);
-  }, []);
-
   return (
     <section className={`relative mx-auto h-screen w-full`}>
       <div
@@ -87,13 +73,11 @@ const Hero = () => {
         </div>
       </div>
 
-      {!isMobile ? (
-        <div className="absolute inset-0 z-0 hidden md:block">
-          <Suspense fallback={null}>
-            <ComputersCanvas />
-          </Suspense>
-        </div>
-      ) : null}
+      <div className="pointer-events-none absolute inset-0 z-0">
+        <Suspense fallback={null}>
+          <ComputersCanvas />
+        </Suspense>
+      </div>
 
       <div className="xs:bottom-10 absolute bottom-32 z-20 flex w-full items-center justify-center">
         <a href="#about">
