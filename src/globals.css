@@ -115,7 +115,7 @@ canvas {
     radial-gradient(circle at 20% 20%, rgba(56, 189, 248, 0.1), transparent 45%),
     radial-gradient(circle at 80% 0%, rgba(139, 92, 246, 0.1), transparent 35%),
     radial-gradient(circle at 50% 80%, rgba(45, 212, 191, 0.08), transparent 40%),
-    url('/src/assets/herobg.png');
+    url('/src/assets/herobg.webp');
 }
 
 /* canvas- styles */

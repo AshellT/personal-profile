@@ -1,12 +1,37 @@
 import { motion } from "framer-motion";
-import { Suspense } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 
 import { styles } from "../../constants/styles";
 import { config } from "../../constants/config";
 import { github } from "../../assets";
-import ComputersCanvas from "../canvas/Computers";
+
+const ComputersCanvas = lazy(() => import("../canvas/Computers"));
 
 const Hero = () => {
+  const [showCanvas, setShowCanvas] = useState(false);
+
+  useEffect(() => {
+    let timeoutId: number | undefined;
+    let idleId: number | undefined;
+
+    const start = () => setShowCanvas(true);
+
+    if (typeof window !== "undefined" && "requestIdleCallback" in window) {
+      idleId = (window as any).requestIdleCallback(start, { timeout: 1200 });
+    } else {
+      timeoutId = globalThis.setTimeout(start, 900);
+    }
+
+    return () => {
+      if (typeof idleId === "number" && "cancelIdleCallback" in window) {
+        (window as any).cancelIdleCallback(idleId);
+      }
+      if (typeof timeoutId === "number") {
+        globalThis.clearTimeout(timeoutId);
+      }
+    };
+  }, []);
+
   return (
     <section className={`relative mx-auto h-screen w-full`}>
       <div
@@ -72,11 +97,13 @@ const Hero = () => {
         </div>
       </div>
 
-      <div className="pointer-events-none absolute inset-0 z-0 translate-y-16 opacity-85 md:translate-y-0 md:opacity-100">
-        <Suspense fallback={null}>
-          <ComputersCanvas />
-        </Suspense>
-      </div>
+      {showCanvas ? (
+        <div className="pointer-events-none absolute inset-0 z-0 translate-y-16 opacity-85 md:translate-y-0 md:opacity-100">
+          <Suspense fallback={null}>
+            <ComputersCanvas />
+          </Suspense>
+        </div>
+      ) : null}
 
       <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-40 bg-gradient-to-t from-[#030712] via-[#030712]/80 to-transparent" />
       <div className="pointer-events-none absolute inset-x-0 top-0 z-10 h-24 bg-gradient-to-b from-[#030712]/90 to-transparent" />
