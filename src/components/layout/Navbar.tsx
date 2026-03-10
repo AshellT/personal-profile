@@ -63,7 +63,11 @@ const Navbar = () => {
             window.scrollTo(0, 0);
           }}
         >
-          <img src={logo} alt="logo" className="h-9 w-9 object-contain" />
+          <img
+            src={logo}
+            alt="ATG logo"
+            className="h-11 w-11 rounded-full object-contain"
+          />
           <p className="headline-font flex cursor-pointer text-[18px] font-bold text-white">
             Ashell Gonese
             <span className="ml-2 hidden text-[13px] font-medium text-sky-200 md:block">

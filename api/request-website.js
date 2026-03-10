@@ -7,7 +7,9 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 const RECEIVER_EMAIL = process.env.CONTACT_RECEIVER_EMAIL;
 const FROM_EMAIL =
   process.env.RESEND_FROM_EMAIL || "Website Requests <onboarding@resend.dev>";
-const EMAIL_LOGO_URL = process.env.RESEND_EMAIL_LOGO_URL || "";
+const EMAIL_LOGO_URL =
+  process.env.RESEND_EMAIL_LOGO_URL ||
+  "https://raw.githubusercontent.com/AshellT/personal-profile/main/src/assets/android-chrome-512x512.png";
 
 function escapeHtml(value) {
   return String(value)
