@@ -73,13 +73,13 @@ const Contact = () => {
     >
       <motion.div
         variants={slideIn("left", "tween", 0.2, 1)}
-        className="bg-black-100 flex-[0.75] rounded-2xl p-8"
+        className="bg-black-100 flex-[0.9] rounded-2xl p-8 md:p-10"
       >
         <Header useMotion={false} {...config.contact} />
 
         <form
           onSubmit={handleSubmit}
-          className="mt-12 flex flex-col gap-8"
+          className="mt-12 flex flex-col gap-9"
         >
           {Object.keys(config.contact.form).map((input) => {
             const { span, placeholder } =
@@ -88,14 +88,16 @@ const Contact = () => {
 
             return (
               <label key={input} className="flex flex-col">
-                <span className="mb-4 font-medium text-white">{span}</span>
+                <span className="mb-4 text-[15px] font-medium text-white md:text-base">
+                  {span}
+                </span>
                 <Component
                   type={input === "email" ? "email" : "text"}
                   name={input}
                   value={form[input as keyof FormState]}
                   onChange={handleChange}
                   placeholder={placeholder}
-                  className="bg-tertiary placeholder:text-secondary rounded-lg border-none px-6 py-4 font-medium text-white outline-none"
+                  className="bg-tertiary placeholder:text-secondary rounded-lg border-none px-6 py-4 text-[15px] font-medium text-white outline-none md:py-5 md:text-base"
                   {...(input === "message" && { rows: 7 })}
                 />
               </label>
@@ -103,7 +105,7 @@ const Contact = () => {
           })}
           <button
             type="submit"
-            className="bg-tertiary shadow-primary w-fit rounded-xl px-8 py-3 font-bold text-white shadow-md outline-none"
+            className="bg-tertiary shadow-primary w-fit rounded-xl px-9 py-3.5 text-[15px] font-bold text-white shadow-md outline-none md:px-10 md:py-4"
           >
             {loading ? "Sending..." : "Send"}
           </button>
@@ -112,7 +114,7 @@ const Contact = () => {
 
       <motion.div
         variants={slideIn("right", "tween", 0.2, 1)}
-        className="h-[350px] md:h-[550px] xl:h-auto xl:flex-1"
+        className="pointer-events-none h-[320px] overflow-hidden rounded-2xl md:h-[550px] xl:h-auto xl:flex-1"
       >
         <EarthCanvas />
       </motion.div>
