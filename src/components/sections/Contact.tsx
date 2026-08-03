@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
-import { EarthCanvas } from "../canvas";
 import { SectionWrapper } from "../../hoc";
-import { slideIn } from "../../utils/motion";
+import { styles } from "../../constants/styles";
 import { config } from "../../constants/config";
+import { brand } from "../../constants/brand";
 import { Header } from "../atoms/Header";
 
 const INITIAL_STATE = Object.fromEntries(
@@ -57,12 +57,14 @@ const Contact = () => {
     setForm({ ...form, [name]: value });
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement> | undefined) => {
+  const handleSubmit = async (
+    e: React.FormEvent<HTMLFormElement> | undefined
+  ) => {
     if (e === undefined) return;
     e.preventDefault();
 
     if (!form.name || !form.email || !form.message) {
-      showToast("error", "Please complete all fields before submitting.");
+      showToast("error", "Please complete all required fields before submitting.");
       return;
     }
 
@@ -101,97 +103,104 @@ const Contact = () => {
       <AnimatePresence>
         {toast ? (
           <motion.div
-            initial={{ opacity: 0, y: -20, scale: 0.96 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -12, scale: 0.96 }}
-            transition={{ duration: 0.28, ease: "easeOut" }}
+            initial={{ opacity: 0, y: -16 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.25 }}
             className="pointer-events-none fixed inset-x-4 top-24 z-[60] mx-auto w-full max-w-md"
           >
             <div
-              className={`rounded-2xl border px-4 py-3 shadow-2xl backdrop-blur-md ${
+              className={`border px-4 py-3 shadow-lg ${
                 toast.type === "success"
-                  ? "border-cyan-300/40 bg-slate-900/90"
-                  : "border-rose-300/40 bg-slate-900/95"
+                  ? "border-accent/30 bg-surface"
+                  : "border-red-300 bg-surface"
               }`}
             >
-              <div className="flex items-start gap-3">
-                <div
-                  className={`mt-0.5 flex h-7 w-7 items-center justify-center rounded-full text-xs font-bold ${
-                    toast.type === "success"
-                      ? "bg-cyan-400 text-slate-900"
-                      : "bg-rose-400 text-slate-900"
-                  }`}
-                >
-                  {toast.type === "success" ? "OK" : "!"}
-                </div>
-                <div>
-                  <p className="headline-font text-sm font-semibold text-white">
-                    {toast.type === "success" ? "Message Sent" : "Send Failed"}
-                  </p>
-                  <p className="mt-1 text-sm text-slate-200">{toast.message}</p>
-                </div>
-              </div>
+              <p className="text-sm font-semibold text-ink">
+                {toast.type === "success" ? "Message sent" : "Send failed"}
+              </p>
+              <p className="mt-1 text-sm text-muted">{toast.message}</p>
             </div>
           </motion.div>
         ) : null}
       </AnimatePresence>
 
-      <div
-        className={`flex flex-col-reverse gap-10 overflow-hidden xl:mt-12 xl:flex-row`}
-      >
-        <motion.div
-          variants={slideIn("left", "tween", 0.2, 1)}
-          className="bg-black-100 flex-[0.9] rounded-2xl p-8 md:p-10"
-        >
+      <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
+        <div className="lg:col-span-5">
+          <img
+            src={brand.mark}
+            alt={brand.alt}
+            width={48}
+            height={48}
+            className="mb-6 h-12 w-12 bg-ink object-cover"
+            decoding="async"
+          />
           <Header useMotion={false} {...config.contact} />
-
-          <form
-            onSubmit={handleSubmit}
-            className="mt-12 flex flex-col gap-9"
-          >
-            {Object.keys(config.contact.form).map((input) => {
-              const { span, placeholder } =
-                config.contact.form[input as keyof typeof config.contact.form];
-              const Component = input === "message" ? "textarea" : "input";
-
-              return (
-                <label key={input} className="flex flex-col">
-                  <span className="mb-4 text-[15px] font-medium text-white md:text-base">
-                    {span}
-                  </span>
-                  <Component
-                    type={
-                      input === "email"
-                        ? "email"
-                        : input === "whatsapp"
-                          ? "tel"
-                          : "text"
-                    }
-                    name={input}
-                    value={form[input as keyof FormState]}
-                    onChange={handleChange}
-                    placeholder={placeholder}
-                    className="bg-tertiary placeholder:text-secondary rounded-lg border-none px-6 py-4 text-[15px] font-medium text-white outline-none md:py-5 md:text-base"
-                    {...(input === "message" && { rows: 7 })}
-                  />
-                </label>
-              );
-            })}
-            <button
-              type="submit"
-              className="bg-tertiary shadow-primary w-fit rounded-xl px-9 py-3.5 text-[15px] font-bold text-white shadow-md outline-none md:px-10 md:py-4"
+          <p className="mt-4 inline-flex border border-accent/25 bg-accent/5 px-3 py-1.5 text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-accent">
+            Open for projects · replies within 24h
+          </p>
+          <p className={`${styles.sectionBody} mt-5`}>
+            Tell me what you need built — websites, systems, automation, or
+            product delivery. Share goals, timeline, and constraints.
+          </p>
+          <div className="mt-8 space-y-3 text-[0.95rem]">
+            <a
+              href={`mailto:${config.html.email}`}
+              className="block font-medium text-ink transition hover:text-accent"
             >
-              {loading ? "Sending..." : "Send"}
-            </button>
-          </form>
-        </motion.div>
+              {config.html.email}
+            </a>
+            <a
+              href={brand.whatsapp.href}
+              target="_blank"
+              rel="noreferrer"
+              className="block font-medium text-ink transition hover:text-accent"
+            >
+              WhatsApp · {brand.whatsapp.display}
+            </a>
+            <p className="text-muted">Harare, Zimbabwe</p>
+          </div>
+        </div>
 
-        <motion.div
-          variants={slideIn("right", "tween", 0.2, 1)}
-          className="pointer-events-none h-[320px] overflow-hidden rounded-2xl md:h-[550px] xl:h-auto xl:flex-1"
+        <form
+          onSubmit={handleSubmit}
+          className="flex flex-col gap-6 border border-line bg-surface p-6 sm:p-8 lg:col-span-7"
         >
-          <EarthCanvas />
-        </motion.div>
+          {Object.keys(config.contact.form).map((input) => {
+            const { span, placeholder } =
+              config.contact.form[input as keyof typeof config.contact.form];
+            const Component = input === "message" ? "textarea" : "input";
+
+            return (
+              <label key={input} className="flex flex-col gap-2">
+                <span className="text-[0.8rem] font-semibold uppercase tracking-[0.12em] text-ink-soft">
+                  {span}
+                  {input !== "whatsapp" ? (
+                    <span className="text-accent"> *</span>
+                  ) : null}
+                </span>
+                <Component
+                  type={
+                    input === "email"
+                      ? "email"
+                      : input === "whatsapp"
+                        ? "tel"
+                        : "text"
+                  }
+                  name={input}
+                  value={form[input as keyof FormState]}
+                  onChange={handleChange}
+                  placeholder={placeholder}
+                  className="input-field"
+                  {...(input === "message" && { rows: 6 })}
+                />
+              </label>
+            );
+          })}
+          <button type="submit" className="btn-primary w-fit" disabled={loading}>
+            {loading ? "Sending..." : "Send request"}
+          </button>
+        </form>
       </div>
     </>
   );

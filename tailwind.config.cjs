@@ -5,23 +5,25 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: "#030712",
-        secondary: "#94a3b8",
-        tertiary: "#0b1220",
-        "black-100": "#0a1020",
-        "black-200": "#050814",
-        "white-100": "#f8fafc",
+        stone: "#F7F5F1",
+        "stone-deep": "#EFECE6",
+        ink: "#0E1116",
+        "ink-soft": "#2A3038",
+        muted: "#5C6570",
+        accent: "#1B4F72",
+        "accent-hover": "#163F5B",
+        line: "rgba(14, 17, 22, 0.12)",
+        surface: "#FFFFFF",
       },
-      boxShadow: {
-        card: "0px 25px 80px -20px rgba(8, 22, 39, 0.8)",
+      fontFamily: {
+        display: ['"Instrument Serif"', "Georgia", "serif"],
+        sans: ['"DM Sans"', "system-ui", "sans-serif"],
+      },
+      maxWidth: {
+        content: "72rem",
       },
       screens: {
         xs: "450px",
-      },
-      backgroundImage: {
-        "hero-pattern": "url('/src/assets/herobg.png')",
-        "radial-grid":
-          "radial-gradient(circle at 20% 20%, rgba(56, 189, 248, 0.1), transparent 45%), radial-gradient(circle at 80% 0%, rgba(139, 92, 246, 0.1), transparent 35%), radial-gradient(circle at 50% 80%, rgba(45, 212, 191, 0.08), transparent 40%)",
       },
     },
   },

@@ -9,7 +9,7 @@ const FROM_EMAIL =
   process.env.RESEND_FROM_EMAIL || "Website Requests <onboarding@resend.dev>";
 const EMAIL_LOGO_URL =
   process.env.RESEND_EMAIL_LOGO_URL ||
-  "https://raw.githubusercontent.com/AshellT/personal-profile/main/src/assets/android-chrome-512x512.png";
+  "https://ashelltinotenda.co.zw/brand/atg-logo-a-master-512.png";
 
 function escapeHtml(value) {
   return String(value)
@@ -76,49 +76,50 @@ function templateForType(type) {
 function buildOwnerEmailHtml({ name, email, whatsapp, message, requestType }) {
   const selected = templateForType(requestType);
   return `
-  <div style="margin:0;padding:0;background:#050b18;font-family:Inter,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:#e2e8f0;">
-    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="padding:28px 16px;">
+  <div style="margin:0;padding:0;background:#F7F5F1;font-family:'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#0E1116;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="padding:32px 16px;">
       <tr>
         <td align="center">
-          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:640px;background:linear-gradient(140deg,#0b1f3f 0%,#0e2a4f 45%,#113b68 100%);border:1px solid rgba(56,189,248,.35);border-radius:18px;overflow:hidden;box-shadow:0 20px 50px -25px rgba(2,6,23,.95),0 0 24px -8px rgba(34,211,238,.55);">
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:640px;background:#ffffff;border:1px solid #E4E0D8;overflow:hidden;">
             <tr>
-              <td style="padding:24px 24px 8px 24px;">
-                <div style="margin:0 0 12px 0;">
-                  <img src="${EMAIL_LOGO_URL}" alt="ATG Logo" width="84" height="84" style="display:block;border:0;outline:none;text-decoration:none;object-fit:contain;" />
-                </div>
-                <p style="margin:0 0 10px 0;font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:#7dd3fc;font-weight:700;">Website Request</p>
-                <h1 style="margin:0;font-size:26px;line-height:1.25;color:#f8fafc;font-weight:800;">New client inquiry received</h1>
+              <td style="height:4px;background:#1B4F72;font-size:0;line-height:0;">&nbsp;</td>
+            </tr>
+            <tr>
+              <td style="padding:28px 28px 12px 28px;">
+                <img src="${EMAIL_LOGO_URL}" alt="ATG" width="64" height="64" style="display:block;border:0;outline:none;text-decoration:none;object-fit:contain;" />
+                <p style="margin:18px 0 8px 0;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#1B4F72;font-weight:700;">Website request</p>
+                <h1 style="margin:0;font-size:26px;line-height:1.25;color:#0E1116;font-weight:600;">New client inquiry</h1>
               </td>
             </tr>
             <tr>
-              <td style="padding:16px 24px 6px 24px;">
-                <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:separate;border-spacing:0 10px;">
+              <td style="padding:8px 28px 8px 28px;">
+                <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:separate;border-spacing:0 12px;">
                   <tr>
-                    <td style="width:130px;color:#93c5fd;font-size:13px;font-weight:700;vertical-align:top;">Name</td>
-                    <td style="font-size:15px;color:#f8fafc;">${escapeHtml(name)}</td>
+                    <td style="width:120px;color:#5C6570;font-size:13px;font-weight:600;vertical-align:top;">Name</td>
+                    <td style="font-size:15px;color:#0E1116;">${escapeHtml(name)}</td>
                   </tr>
                   <tr>
-                    <td style="width:130px;color:#93c5fd;font-size:13px;font-weight:700;vertical-align:top;">Email</td>
-                    <td style="font-size:15px;color:#f8fafc;">${escapeHtml(email)}</td>
+                    <td style="width:120px;color:#5C6570;font-size:13px;font-weight:600;vertical-align:top;">Email</td>
+                    <td style="font-size:15px;color:#0E1116;">${escapeHtml(email)}</td>
                   </tr>
                   <tr>
-                    <td style="width:130px;color:#93c5fd;font-size:13px;font-weight:700;vertical-align:top;">WhatsApp</td>
-                    <td style="font-size:15px;color:#f8fafc;">${escapeHtml(whatsapp || "Not provided")}</td>
+                    <td style="width:120px;color:#5C6570;font-size:13px;font-weight:600;vertical-align:top;">WhatsApp</td>
+                    <td style="font-size:15px;color:#0E1116;">${escapeHtml(whatsapp || "Not provided")}</td>
                   </tr>
                   <tr>
-                    <td style="width:130px;color:#93c5fd;font-size:13px;font-weight:700;vertical-align:top;">Request type</td>
-                    <td style="font-size:15px;color:#f8fafc;">${selected.label}</td>
+                    <td style="width:120px;color:#5C6570;font-size:13px;font-weight:600;vertical-align:top;">Type</td>
+                    <td style="font-size:15px;color:#0E1116;">${selected.label}</td>
                   </tr>
                 </table>
               </td>
             </tr>
             <tr>
-              <td style="padding:8px 24px 24px 24px;">
-                <div style="background:rgba(15,23,42,.55);border:1px solid rgba(56,189,248,.28);border-radius:14px;padding:16px 18px;">
-                  <p style="margin:0 0 8px 0;font-size:13px;color:#93c5fd;font-weight:700;">Project Brief</p>
-                  <p style="margin:0;font-size:15px;line-height:1.7;color:#e2e8f0;">${nl2br(message)}</p>
+              <td style="padding:8px 28px 28px 28px;">
+                <div style="background:#F7F5F1;border:1px solid #E4E0D8;padding:18px 20px;">
+                  <p style="margin:0 0 8px 0;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#1B4F72;font-weight:700;">Project brief</p>
+                  <p style="margin:0;font-size:15px;line-height:1.7;color:#0E1116;">${nl2br(message)}</p>
                 </div>
-                <p style="margin:14px 0 0 0;font-size:12px;line-height:1.6;color:#94a3b8;">From Ashell Gonese</p>
+                <p style="margin:16px 0 0 0;font-size:12px;line-height:1.6;color:#5C6570;">ashelltinotenda.co.zw</p>
               </td>
             </tr>
           </table>
@@ -131,36 +132,37 @@ function buildOwnerEmailHtml({ name, email, whatsapp, message, requestType }) {
 function buildAutoReplyHtml({ name, message, requestType }) {
   const selected = templateForType(requestType);
   return `
-  <div style="margin:0;padding:0;background:#f3f8ff;font-family:Inter,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:#0f172a;">
-    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="padding:28px 16px;">
+  <div style="margin:0;padding:0;background:#F7F5F1;font-family:'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#0E1116;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="padding:32px 16px;">
       <tr>
         <td align="center">
-          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:640px;background:#ffffff;border:1px solid #dbeafe;border-radius:16px;overflow:hidden;box-shadow:0 14px 34px -20px rgba(15,23,42,.35);">
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:640px;background:#ffffff;border:1px solid #E4E0D8;overflow:hidden;">
             <tr>
-              <td style="padding:24px;background:linear-gradient(135deg,#0b1f3f 0%,#0f3a6a 100%);">
-                <div style="margin:0 0 12px 0;">
-                  <img src="${EMAIL_LOGO_URL}" alt="ATG Logo" width="84" height="84" style="display:block;border:0;outline:none;text-decoration:none;object-fit:contain;" />
-                </div>
-                <p style="margin:0;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#7dd3fc;font-weight:700;">Ashell Gonese</p>
-                <h1 style="margin:8px 0 0 0;font-size:24px;line-height:1.3;color:#f8fafc;font-weight:800;">Your website request has been received</h1>
+              <td style="height:4px;background:#1B4F72;font-size:0;line-height:0;">&nbsp;</td>
+            </tr>
+            <tr>
+              <td style="padding:28px 28px 8px 28px;">
+                <img src="${EMAIL_LOGO_URL}" alt="ATG" width="64" height="64" style="display:block;border:0;outline:none;text-decoration:none;object-fit:contain;" />
+                <p style="margin:18px 0 8px 0;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#1B4F72;font-weight:700;">Ashell Gonese</p>
+                <h1 style="margin:0;font-size:26px;line-height:1.3;color:#0E1116;font-weight:600;">Request received</h1>
               </td>
             </tr>
             <tr>
-              <td style="padding:24px;">
-                <p style="margin:0 0 14px 0;font-size:16px;line-height:1.65;">Hi ${escapeHtml(name)},</p>
-                <p style="margin:0 0 14px 0;font-size:15px;line-height:1.75;color:#334155;">Thank you for reaching out about your ${selected.label.toLowerCase()}. I have received your request and I will review your project brief shortly.</p>
-                <p style="margin:0 0 18px 0;font-size:15px;line-height:1.75;color:#334155;">${selected.nextSteps}</p>
+              <td style="padding:12px 28px 28px 28px;">
+                <p style="margin:0 0 14px 0;font-size:16px;line-height:1.65;color:#0E1116;">Hi ${escapeHtml(name)},</p>
+                <p style="margin:0 0 14px 0;font-size:15px;line-height:1.75;color:#5C6570;">Thank you for reaching out about your ${selected.label.toLowerCase()}. I have received your request and will review the brief shortly.</p>
+                <p style="margin:0 0 22px 0;font-size:15px;line-height:1.75;color:#5C6570;">${selected.nextSteps}</p>
 
-                <div style="margin:0 0 18px 0;">
-                  <a href="mailto:ashell.gonese@outlook.com?subject=Website%20Request%20Follow-up" style="display:inline-block;background:linear-gradient(135deg,#0ea5e9,#2563eb);color:#ffffff;font-weight:700;font-size:14px;line-height:1;text-decoration:none;padding:12px 16px;border-radius:10px;box-shadow:0 10px 24px -14px rgba(37,99,235,.9);">Reply with More Details</a>
+                <div style="margin:0 0 22px 0;">
+                  <a href="mailto:ashell.gonese@outlook.com?subject=Website%20Request%20Follow-up" style="display:inline-block;background:#1B4F72;color:#ffffff;font-weight:600;font-size:14px;line-height:1;text-decoration:none;padding:14px 18px;">Reply with more details</a>
                 </div>
 
-                <div style="background:#f8fbff;border:1px solid #dbeafe;border-radius:12px;padding:14px 16px;margin:0 0 18px 0;">
-                  <p style="margin:0 0 8px 0;font-size:13px;color:#1d4ed8;font-weight:700;">Your submitted brief</p>
-                  <p style="margin:0;font-size:14px;line-height:1.7;color:#334155;">${nl2br(message)}</p>
+                <div style="background:#F7F5F1;border:1px solid #E4E0D8;padding:16px 18px;margin:0 0 22px 0;">
+                  <p style="margin:0 0 8px 0;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#1B4F72;font-weight:700;">Your submitted brief</p>
+                  <p style="margin:0;font-size:14px;line-height:1.7;color:#0E1116;">${nl2br(message)}</p>
                 </div>
 
-                <p style="margin:0;font-size:14px;line-height:1.7;color:#475569;">Best regards,<br /><strong style="color:#0f172a;">Ashell Gonese</strong><br />Full-Stack Systems Engineer<br />From Ashell Gonese</p>
+                <p style="margin:0;font-size:14px;line-height:1.7;color:#5C6570;">Best regards,<br /><strong style="color:#0E1116;">Ashell Gonese</strong><br />Full-Stack Systems Engineer<br />ATG Digital Agency</p>
               </td>
             </tr>
           </table>

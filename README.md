@@ -1,127 +1,84 @@
-# Personal Portfolio
+# Ashell Tinotenda Gonese — Personal Portfolio
 
-A modern 3D developer portfolio built with React, TypeScript, Vite, Three.js, and Tailwind CSS.
+Editorial-light personal site for **Ashell Tinotenda Gonese**, Full-Stack Systems Engineer and founder of [ATG Digital Agency](https://www.atgdigitalagency.co.zw/).
+
+**Live:** [ashelltinotenda.co.zw](https://ashelltinotenda.co.zw/)
+
+## Stack
+
+- React 18 + TypeScript
+- Vite 5
+- Tailwind CSS
+- Framer Motion
+- React Router
+- Resend (contact API)
+- PWA via `vite-plugin-pwa`
 
 ## Features
 
-- 3D interactive sections powered by `three.js` and `@react-three/fiber`
-- Smooth animations and transitions with `framer-motion`
-- Responsive layout for desktop and mobile
-- Structured, component-based architecture
-- Fast development/build pipeline using `vite`
+- Typographic hero and sectioned portfolio (projects, experience, credentials, proof, contact)
+- Open Graph share card (`public/og/og-card.jpg`)
+- Installable PWA with white app icons
+- Privacy / Terms pages and custom 404
+- Contact form → serverless Resend emails (`api/request-website.js`)
 
-## Tech Stack
-
-- React + TypeScript
-- Vite
-- Three.js (`@react-three/fiber`, `@react-three/drei`)
-- Tailwind CSS
-- Framer Motion
-
-## Project Structure
-
-```text
-src/
-	assets/            # Images, icons, static UI assets
-	components/
-		atoms/           # Small reusable UI pieces
-		canvas/          # 3D canvas components (Earth, Stars, etc.)
-		layout/          # Navbar, loader, shared layout blocks
-		sections/        # Page sections (Hero, About, Tech, Works, Contact)
-	constants/         # App config, style tokens, static data
-	hoc/               # Higher-order wrappers
-	types/             # Shared TypeScript types
-	utils/             # Utility functions (motion helpers, etc.)
-	App.tsx
-	main.tsx
-```
-
-## Getting Started
-
-### Prerequisites
-
-- Node.js 18+ (recommended)
-- npm 9+
-
-### Installation
+## Getting started
 
 ```bash
 npm install
-```
-
-### Run Development Server
-
-```bash
 npm run dev
 ```
 
-Open the app at:
-
-```text
-http://localhost:5173
-```
-
-## Available Scripts
-
-- `npm run dev` - Start local development server
-- `npm run build` - Build production bundle
-- `npm run preview` - Preview production build locally
-
-## Build for Production
-
 ```bash
 npm run build
+npm run preview
 ```
 
-The output is generated in the `dist/` folder.
+## Environment
 
-## Deployment
+Copy `.env.example` to `.env` (local) and set the same vars in your host (e.g. Vercel):
 
-You can deploy this project to:
+| Variable | Required | Purpose |
+|----------|----------|---------|
+| `RESEND_API_KEY` | Yes (contact) | Resend API key |
+| `CONTACT_RECEIVER_EMAIL` | Yes (contact) | Inbox for submissions |
+| `RESEND_FROM_EMAIL` | Recommended | Verified sender, e.g. `Ashell Gonese <hello@yourdomain.com>` |
+| `RESEND_EMAIL_LOGO_URL` | Optional | Logo in email headers |
+| `VITE_GA_MEASUREMENT_ID` | Optional | Google Analytics (`G-XXXXXXXX`) |
 
-- Vercel
-- Netlify
-- GitHub Pages (with additional Vite base path setup)
+> Production tip: verify a domain in Resend and stop using `onboarding@resend.dev` before inviting real clients.
 
-General deployment flow:
+## Project structure
 
-1. Push to GitHub
-2. Import repository into your hosting platform
-3. Set build command to `npm run build`
-4. Set publish/output directory to `dist`
+```text
+api/                 # Serverless contact handler (Vercel)
+public/
+  about/             # Portrait
+  brand/             # ATG marks
+  og/                # Open Graph card
+  portfolio/         # Project imagery
+  pwa/               # App icons
+src/
+  components/        # Layout, sections, pages, atoms
+  constants/         # Copy, projects, credentials, brand
+  hoc/               # Section wrappers
+```
 
-## Contact Form (React + Resend)
+## Deploy (Vercel)
 
-This project now sends contact requests through a secure server endpoint using Resend.
+1. Connect the repo and set the env vars above.
+2. Framework: Vite — build `npm run build`, output `dist`.
+3. `vercel.json` rewrites SPA routes and adds basic security headers.
+4. After deploy, refresh the OG cache:
+   - [Facebook Sharing Debugger](https://developers.facebook.com/tools/debug/)
+   - [LinkedIn Post Inspector](https://www.linkedin.com/post-inspector/)
 
-### How it works
+## Scripts
 
-1. User submits the contact form from the website.
-2. Frontend sends a `POST` request to `/api/request-website`.
-3. Server route uses Resend to send the email to your inbox.
-
-### Receiver inbox
-
-Incoming requests are sent to the email configured in `CONTACT_RECEIVER_EMAIL`.
-
-### Environment variables
-
-Copy `.env.example` and set values in your deployment platform:
-
-- `RESEND_API_KEY` (required)
-- `CONTACT_RECEIVER_EMAIL` (required)
-- `RESEND_FROM_EMAIL` (optional but recommended)
-- `RESEND_EMAIL_LOGO_URL` (optional, used as email header logo)
-
-### Files involved
-
-- Frontend form: `src/components/sections/Contact.tsx`
-- API route: `api/request-website.js`
-
-## Author
-
-Ashell Gonese
-
-## License
-
-This project is licensed under the MIT License. See `LICENSE` for details.
+| Script | Description |
+|--------|-------------|
+| `npm run dev` | Local dev server |
+| `npm run build` | Typecheck + production build |
+| `npm run preview` | Preview production build |
+| `npm run lint` | ESLint |
+| `npm run ts:check` | TypeScript only |

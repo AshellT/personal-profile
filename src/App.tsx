@@ -1,17 +1,34 @@
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { lazy, Suspense, useEffect } from "react";
 
 import Hero from "./components/sections/Hero";
 import Navbar from "./components/layout/Navbar";
+import Footer from "./components/layout/Footer";
+import About from "./components/sections/About";
+import Works from "./components/sections/Works";
 import { config } from "./constants/config";
 
-const About = lazy(() => import("./components/sections/About"));
 const Experience = lazy(() => import("./components/sections/Experience"));
-const Tech = lazy(() => import("./components/sections/Tech"));
-const Works = lazy(() => import("./components/sections/Works"));
-const Feedbacks = lazy(() => import("./components/sections/Feedbacks"));
+const Credentials = lazy(() => import("./components/sections/Credentials"));
 const Contact = lazy(() => import("./components/sections/Contact"));
-const StarsCanvas = lazy(() => import("./components/canvas/Stars"));
+const Proof = lazy(() => import("./components/sections/Proof"));
+const Privacy = lazy(() => import("./components/pages/Privacy"));
+const Terms = lazy(() => import("./components/pages/Terms"));
+const NotFound = lazy(() => import("./components/pages/NotFound"));
+
+const HomePage = () => (
+  <>
+    <Hero />
+    <About />
+    <Works />
+    <Suspense fallback={<div className="h-24" aria-hidden />}>
+      <Proof />
+      <Experience />
+      <Credentials />
+      <Contact />
+    </Suspense>
+  </>
+);
 
 const App = () => {
   useEffect(() => {
@@ -20,24 +37,47 @@ const App = () => {
     }
   }, []);
 
+  useEffect(() => {
+    const measurementId = import.meta.env.VITE_GA_MEASUREMENT_ID as
+      | string
+      | undefined;
+    if (!measurementId || typeof window === "undefined") return;
+
+    const existing = document.getElementById("ga-gtag");
+    if (existing) return;
+
+    const script = document.createElement("script");
+    script.id = "ga-gtag";
+    script.async = true;
+    script.src = `https://www.googletagmanager.com/gtag/js?id=${measurementId}`;
+    document.head.appendChild(script);
+
+    const inline = document.createElement("script");
+    inline.id = "ga-inline";
+    inline.innerHTML = `
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', '${measurementId}');
+    `;
+    document.head.appendChild(inline);
+  }, []);
+
   return (
     <BrowserRouter>
-      <div className="bg-primary relative z-0 overflow-x-hidden">
-        <div className="hero-layered-bg bg-cover bg-center bg-no-repeat">
-          <Navbar />
-          <Hero />
-        </div>
-        <Suspense fallback={<div className="h-24" />}>
-          <About />
-          <Experience />
-          <Tech />
-          <Works />
-          <Feedbacks />
-          <div className="relative z-0 bg-radial-grid">
-            <Contact />
-            <StarsCanvas />
-          </div>
-        </Suspense>
+      <div className="page-atmosphere relative z-0 min-h-screen overflow-x-hidden text-ink">
+        <Navbar />
+        <main>
+          <Suspense fallback={<div className="h-24" aria-hidden />}>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/privacy" element={<Privacy />} />
+              <Route path="/terms" element={<Terms />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Suspense>
+        </main>
+        <Footer />
       </div>
     </BrowserRouter>
   );

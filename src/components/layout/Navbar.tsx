@@ -1,45 +1,38 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 
 import { styles } from "../../constants/styles";
 import { navLinks } from "../../constants";
-import { logo, menu, close } from "../../assets";
+import { menu, close } from "../../assets";
+import BrandLogo from "../atoms/BrandLogo";
 
 const Navbar = () => {
-  const [active, setActive] = useState<string | null>();
+  const [active, setActive] = useState<string>("");
   const [toggle, setToggle] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrollTop = window.scrollY;
-      if (scrollTop > 100) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-        setActive("");
-      }
+      setScrolled(window.scrollY > 40);
     };
-
-    window.addEventListener("scroll", handleScroll);
 
     const navbarHighlighter = () => {
       const sections = document.querySelectorAll("section[id]");
 
       sections.forEach((current) => {
         const sectionId = current.getAttribute("id");
-        // @ts-ignore
-        const sectionHeight = current.offsetHeight;
+        const sectionHeight = (current as HTMLElement).offsetHeight;
         const sectionTop =
           current.getBoundingClientRect().top - sectionHeight * 0.2;
 
-        if (sectionTop < 0 && sectionTop + sectionHeight > 0) {
+        if (sectionTop < 0 && sectionTop + sectionHeight > 0 && sectionId) {
           setActive(sectionId);
         }
       });
     };
 
+    window.addEventListener("scroll", handleScroll);
     window.addEventListener("scroll", navbarHighlighter);
+    handleScroll();
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -49,94 +42,96 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`${
-        styles.paddingX
-      } fixed top-0 z-20 flex w-full items-center py-5 transition-colors duration-300 ${
-        scrolled ? "frosted-panel" : "bg-transparent"
+      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
+        scrolled
+          ? "border-b border-line bg-stone/90 backdrop-blur-md"
+          : "bg-transparent"
       }`}
     >
-      <div className="mx-auto flex w-full max-w-7xl items-center justify-between">
-        <Link
-          to="/"
-          className="flex items-center gap-2"
+      <div
+        className={`${styles.paddingX} mx-auto flex h-[72px] max-w-content items-center justify-between`}
+      >
+        <BrandLogo
+          size="sm"
           onClick={() => {
+            setActive("");
             window.scrollTo(0, 0);
           }}
+        />
+
+        <ul className="hidden list-none items-center gap-8 md:flex">
+          {navLinks.map((link) => (
+            <li key={link.id}>
+              <a
+                href={`/#${link.id}`}
+                className={`text-[0.85rem] font-medium tracking-wide transition ${
+                  active === link.id
+                    ? "text-accent"
+                    : "text-ink-soft hover:text-ink"
+                }`}
+                onClick={() => setActive(link.id)}
+              >
+                {link.title}
+              </a>
+            </li>
+          ))}
+          <li>
+            <a
+              href="https://drive.google.com/file/d/1zPAgFIdU4UwTHnrKZrMeIVuh56lMSlGi/view?usp=sharing"
+              target="_blank"
+              rel="noreferrer"
+              className="btn-primary text-[0.8rem]"
+            >
+              Review CV
+            </a>
+          </li>
+        </ul>
+
+        <button
+          type="button"
+          className="flex h-10 w-10 items-center justify-center md:hidden"
+          aria-label="Toggle menu"
+          aria-expanded={toggle}
+          onClick={() => setToggle((prev) => !prev)}
         >
           <img
-            src={logo}
-            alt="ATG logo"
-            className="h-11 w-11 rounded-full object-contain"
-          />
-          <p className="headline-font flex cursor-pointer text-[18px] font-bold text-white">
-            Ashell Gonese
-            <span className="ml-2 hidden text-[13px] font-medium text-sky-200 md:block">
-              Full-Stack Systems Engineer
-            </span>
-          </p>
-        </Link>
-
-        <div className="hidden items-center gap-6 sm:flex">
-          <ul className="list-none flex-row gap-10 sm:flex">
-            {navLinks.map((nav) => (
-              <li
-                key={nav.id}
-                className={`${
-                  active === nav.id ? "text-white" : "text-secondary"
-                } cursor-pointer text-[18px] font-medium hover:text-white`}
-              >
-                <a href={`#${nav.id}`}>{nav.title}</a>
-              </li>
-            ))}
-          </ul>
-          <a
-            href="#contact"
-            className="headline-font rounded-xl border border-cyan-300/40 bg-cyan-400/20 px-4 py-2 text-[13px] font-semibold uppercase tracking-wider text-cyan-100 transition hover:bg-cyan-300 hover:text-slate-900"
-          >
-            Get a Website
-          </a>
-        </div>
-
-        <div className="flex flex-1 items-center justify-end sm:hidden">
-          <img
             src={toggle ? close : menu}
-            alt="menu"
-            className="h-[28px] w-[28px] object-contain"
-            onClick={() => setToggle(!toggle)}
+            alt=""
+            className="h-6 w-6 object-contain"
           />
+        </button>
+      </div>
 
-          <div
-            className={`${
-              !toggle ? "hidden" : "flex"
-            } frosted-panel absolute right-0 top-20 z-10 mx-4 my-2 min-w-[160px] rounded-xl p-6`}
-          >
-            <ul className="flex flex-1 list-none flex-col items-start justify-end gap-4">
-              {navLinks.map((nav) => (
-                <li
-                  key={nav.id}
-                  className={`font-poppins cursor-pointer text-[16px] font-medium ${
-                    active === nav.id ? "text-white" : "text-secondary"
-                  }`}
+      {toggle ? (
+        <div className="border-t border-line bg-stone px-6 py-6 md:hidden">
+          <ul className="flex list-none flex-col gap-4">
+            {navLinks.map((link) => (
+              <li key={link.id}>
+                <a
+                  href={`/#${link.id}`}
+                  className="text-base font-medium text-ink-soft"
                   onClick={() => {
-                    setToggle(!toggle);
+                    setToggle(false);
+                    setActive(link.id);
                   }}
                 >
-                  <a href={`#${nav.id}`}>{nav.title}</a>
-                </li>
-              ))}
-              <li className="w-full pt-2">
-                <a
-                  href="#contact"
-                  onClick={() => setToggle(false)}
-                  className="headline-font block w-full rounded-xl border border-cyan-300/40 bg-cyan-400/20 px-3 py-2 text-center text-[12px] font-semibold uppercase tracking-widest text-cyan-100"
-                >
-                  Get a Website
+                  {link.title}
                 </a>
               </li>
-            </ul>
-          </div>
+            ))}
+            <li className="pt-2">
+              <a
+                href="https://drive.google.com/file/d/1zPAgFIdU4UwTHnrKZrMeIVuh56lMSlGi/view?usp=sharing"
+                target="_blank"
+                rel="noreferrer"
+                className="btn-primary w-full"
+              >
+                Review CV
+              </a>
+            </li>
+          </ul>
         </div>
-      </div>
+      ) : null}
     </nav>
   );
 };

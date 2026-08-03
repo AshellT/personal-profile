@@ -16,17 +16,36 @@ export type TTestimonial = {
   designation: string;
   company: string;
   image: string;
+  issued?: string;
+  credentialId?: string;
+  credentialUrl?: string;
+  featured?: boolean;
 } & Required<Pick<TCommonProps, "name">>;
 
+export type TClientQuote = {
+  quote: string;
+  role: string;
+  context: string;
+};
+
+export type TProjectMetric = {
+  label: string;
+  value: string;
+};
+
 export type TProject = {
+  name: string;
   description: string;
-  tags: {
-    name: string;
-    color: string;
-  }[];
+  category: string;
+  tags: string[];
   image: string;
-  sourceCodeLink: string;
-} & Required<Pick<TCommonProps, "name">>;
+  secondaryImage?: string;
+  liveUrl?: string;
+  caseStudyUrl: string;
+  metrics?: TProjectMetric[];
+  outcome?: string;
+  featured?: boolean;
+};
 
 export type TTechnology = Required<Omit<TCommonProps, "title">>;
 

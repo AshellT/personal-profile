@@ -1,15 +1,17 @@
 export const styles = {
-  paddingX: "sm:px-16 px-6",
-  paddingY: "sm:py-16 py-6",
-  padding: "sm:px-16 px-6 sm:py-16 py-10",
+  paddingX: "px-6 sm:px-10 lg:px-16",
+  paddingY: "py-16 sm:py-20 lg:py-28",
+  padding: "px-6 sm:px-10 lg:px-16 py-16 sm:py-20 lg:py-28",
 
-  heroHeadText:
-    "headline-font font-extrabold text-white lg:text-[74px] sm:text-[56px] xs:text-[44px] text-[34px] lg:leading-[86px] mt-2",
-  heroSubText:
-    "text-[#d9e5f3] font-medium lg:text-[26px] sm:text-[22px] xs:text-[19px] text-[16px] lg:leading-[35px]",
+  heroName:
+    "display-font text-ink text-[clamp(3.25rem,10vw,7.5rem)] leading-[0.92] tracking-[-0.03em]",
+  heroRole:
+    "text-ink-soft text-[clamp(1.05rem,2.2vw,1.35rem)] font-medium leading-relaxed",
+  heroSupport: "text-muted max-w-xl text-[1.05rem] leading-relaxed",
 
-  sectionHeadText:
-    "headline-font text-white font-extrabold md:text-[56px] sm:text-[46px] xs:text-[36px] text-[30px]",
-  sectionSubText:
-    "sm:text-[18px] text-[14px] text-secondary uppercase tracking-wider",
+  sectionLabel:
+    "text-[0.75rem] font-semibold uppercase tracking-[0.18em] text-accent",
+  sectionHead:
+    "display-font text-ink text-[clamp(2.25rem,5vw,3.75rem)] leading-[1.05] tracking-[-0.02em]",
+  sectionBody: "text-muted max-w-2xl text-[1.05rem] leading-relaxed",
 };
