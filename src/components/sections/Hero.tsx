@@ -82,12 +82,21 @@ const Hero = () => {
               </a>
               <span className="text-line">/</span>
               <a
-                href="https://www.linkedin.com/in/ashell-gonese-832570386/"
+                href={brand.linkedinUrl}
                 target="_blank"
                 rel="noreferrer"
                 className="text-[0.8rem] font-semibold uppercase tracking-[0.12em] text-ink-soft transition hover:text-accent"
               >
                 LinkedIn
+              </a>
+              <span className="text-line">/</span>
+              <a
+                href={brand.githubUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="text-[0.8rem] font-semibold uppercase tracking-[0.12em] text-ink-soft transition hover:text-accent"
+              >
+                GitHub
               </a>
             </div>
           </motion.div>

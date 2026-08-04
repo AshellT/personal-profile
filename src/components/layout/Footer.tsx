@@ -78,12 +78,22 @@ const Footer = () => {
               </li>
               <li>
                 <a
-                  href="https://www.linkedin.com/in/ashell-gonese-832570386/"
+                  href={brand.linkedinUrl}
                   target="_blank"
                   rel="noreferrer"
                   className="text-[0.95rem] text-ink-soft transition hover:text-ink"
                 >
                   LinkedIn
+                </a>
+              </li>
+              <li>
+                <a
+                  href={brand.githubUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-[0.95rem] text-ink-soft transition hover:text-ink"
+                >
+                  GitHub
                 </a>
               </li>
               <li>

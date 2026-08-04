@@ -22,4 +22,6 @@ export const brand = {
   /** Public CV PDF */
   cvUrl:
     "https://drive.google.com/file/d/1r9yxgZlzMh9cJW13pqR4dYRX8uRlHHW8/view?usp=sharing",
+  linkedinUrl: "https://www.linkedin.com/in/ashell-gonese-832570386/",
+  githubUrl: "https://github.com/AshellT",
 } as const;
