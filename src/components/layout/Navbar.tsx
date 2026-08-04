@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 import { styles } from "../../constants/styles";
 import { navLinks } from "../../constants";
+import { brand } from "../../constants/brand";
 import { menu, close } from "../../assets";
 import BrandLogo from "../atoms/BrandLogo";
 
@@ -77,7 +78,7 @@ const Navbar = () => {
           ))}
           <li>
             <a
-              href="https://drive.google.com/file/d/1zPAgFIdU4UwTHnrKZrMeIVuh56lMSlGi/view?usp=sharing"
+              href={brand.cvUrl}
               target="_blank"
               rel="noreferrer"
               className="btn-primary text-[0.8rem]"
@@ -121,7 +122,7 @@ const Navbar = () => {
             ))}
             <li className="pt-2">
               <a
-                href="https://drive.google.com/file/d/1zPAgFIdU4UwTHnrKZrMeIVuh56lMSlGi/view?usp=sharing"
+                href={brand.cvUrl}
                 target="_blank"
                 rel="noreferrer"
                 className="btn-primary w-full"

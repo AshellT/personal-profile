@@ -19,4 +19,7 @@ export const brand = {
     e164: "263784665445",
     href: "https://wa.me/263784665445",
   },
+  /** Public CV PDF */
+  cvUrl:
+    "https://drive.google.com/file/d/1r9yxgZlzMh9cJW13pqR4dYRX8uRlHHW8/view?usp=sharing",
 } as const;

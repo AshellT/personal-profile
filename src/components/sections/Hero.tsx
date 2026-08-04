@@ -73,7 +73,7 @@ const Hero = () => {
               </a>
               <span className="text-line">/</span>
               <a
-                href="https://drive.google.com/file/d/1zPAgFIdU4UwTHnrKZrMeIVuh56lMSlGi/view?usp=sharing"
+                href={brand.cvUrl}
                 target="_blank"
                 rel="noreferrer"
                 className="text-[0.8rem] font-semibold uppercase tracking-[0.12em] text-ink-soft transition hover:text-accent"

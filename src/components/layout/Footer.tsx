@@ -98,7 +98,7 @@ const Footer = () => {
               </li>
               <li>
                 <a
-                  href="https://drive.google.com/file/d/1zPAgFIdU4UwTHnrKZrMeIVuh56lMSlGi/view?usp=sharing"
+                  href={brand.cvUrl}
                   target="_blank"
                   rel="noreferrer"
                   className="text-[0.95rem] text-ink-soft transition hover:text-ink"
