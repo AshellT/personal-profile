@@ -4,6 +4,19 @@ export type { TProject, TProjectMetric };
 
 export const agencyPortfolioUrl = "https://www.atgdigitalagency.co.zw/portfolio";
 
+export const projectSlug = (name: string) =>
+  name
+    .toLowerCase()
+    .replace(/[—–]/g, "-")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+
+export const getProjectBySlug = (slug: string) =>
+  projects.find((project) => projectSlug(project.name) === slug);
+
+export const projectPath = (project: TProject) =>
+  `/work/${projectSlug(project.name)}`;
+
 export const projects: TProject[] = [
   {
     name: "TenderAI — PRAZ Proposals in Minutes",

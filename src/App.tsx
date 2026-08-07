@@ -16,6 +16,8 @@ const Contact = lazy(() => import("./components/sections/Contact"));
 const Proof = lazy(() => import("./components/sections/Proof"));
 const Privacy = lazy(() => import("./components/pages/Privacy"));
 const Terms = lazy(() => import("./components/pages/Terms"));
+const WorkIndex = lazy(() => import("./components/pages/WorkIndex"));
+const WorkDetail = lazy(() => import("./components/pages/WorkDetail"));
 const NotFound = lazy(() => import("./components/pages/NotFound"));
 
 const HOME_DESCRIPTION =
@@ -76,6 +78,8 @@ const App = () => {
             <Suspense fallback={<div className="h-24" aria-hidden />}>
               <Routes>
                 <Route path="/" element={<HomePage />} />
+                <Route path="/work" element={<WorkIndex />} />
+                <Route path="/work/:slug" element={<WorkDetail />} />
                 <Route path="/privacy" element={<Privacy />} />
                 <Route path="/terms" element={<Terms />} />
                 <Route path="*" element={<NotFound />} />

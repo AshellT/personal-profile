@@ -48,6 +48,14 @@ const Footer = () => {
               Navigate
             </p>
             <ul className="mt-4 space-y-2.5">
+              <li>
+                <Link
+                  to="/work"
+                  className="text-[0.95rem] text-ink-soft transition hover:text-ink"
+                >
+                  Selected work
+                </Link>
+              </li>
               {navLinks.map((link) => (
                 <li key={link.id}>
                   <a

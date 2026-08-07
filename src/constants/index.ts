@@ -5,7 +5,7 @@ import type {
   TExperience,
 } from "../types";
 
-export { projects, agencyPortfolioUrl } from "./projects";
+export { projects, agencyPortfolioUrl, projectSlug, getProjectBySlug, projectPath } from "./projects";
 export { credentials } from "./credentials";
 export type { TCredential } from "./credentials";
 export { clientQuotes, deliveryStats } from "./proof";

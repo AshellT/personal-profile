@@ -1,11 +1,16 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
-import { SectionWrapper } from "../../hoc";
-import { projects, agencyPortfolioUrl } from "../../constants";
+import {
+  projects,
+  agencyPortfolioUrl,
+  projectPath,
+} from "../../constants";
 import { styles } from "../../constants/styles";
 import { config } from "../../constants/config";
 import { brand } from "../../constants/brand";
 import { Header } from "../atoms/Header";
+import { SectionWrapper } from "../../hoc";
 import type { TProject } from "../../types";
 
 const FeaturedProject: React.FC<{ project: TProject; index: number }> = ({
@@ -13,6 +18,7 @@ const FeaturedProject: React.FC<{ project: TProject; index: number }> = ({
   index,
 }) => {
   const reverse = index % 2 === 1;
+  const href = projectPath(project);
 
   return (
     <motion.article
@@ -27,7 +33,7 @@ const FeaturedProject: React.FC<{ project: TProject; index: number }> = ({
           reverse ? "lg:col-span-6 lg:order-2" : "lg:col-span-6"
         }`}
       >
-        <a href={project.caseStudyUrl} target="_blank" rel="noreferrer" className="block">
+        <Link to={href} className="block">
           <img
             src={project.image}
             alt={project.name}
@@ -35,12 +41,10 @@ const FeaturedProject: React.FC<{ project: TProject; index: number }> = ({
             decoding="async"
             className="aspect-[16/10] h-full w-full object-cover transition duration-700 group-hover:scale-[1.03]"
           />
-        </a>
+        </Link>
         {project.secondaryImage ? (
-          <a
-            href={project.liveUrl || project.caseStudyUrl}
-            target="_blank"
-            rel="noreferrer"
+          <Link
+            to={href}
             className="absolute bottom-3 right-3 hidden w-[42%] overflow-hidden border border-white/40 shadow-lg sm:block"
           >
             <img
@@ -50,7 +54,7 @@ const FeaturedProject: React.FC<{ project: TProject; index: number }> = ({
               decoding="async"
               className="aspect-[16/10] w-full object-cover"
             />
-          </a>
+          </Link>
         ) : null}
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/30 via-transparent to-transparent opacity-70" />
       </div>
@@ -60,14 +64,9 @@ const FeaturedProject: React.FC<{ project: TProject; index: number }> = ({
           {String(index + 1).padStart(2, "0")} · {project.category}
         </p>
         <h3 className="display-font mt-3 text-[clamp(1.85rem,3.2vw,2.75rem)] leading-[1.08] text-ink">
-          <a
-            href={project.caseStudyUrl}
-            target="_blank"
-            rel="noreferrer"
-            className="transition hover:text-accent"
-          >
+          <Link to={href} className="transition hover:text-accent">
             {project.name}
-          </a>
+          </Link>
         </h3>
         <p className="mt-4 max-w-xl text-[1.02rem] leading-relaxed text-muted">
           {project.description}
@@ -105,14 +104,9 @@ const FeaturedProject: React.FC<{ project: TProject; index: number }> = ({
         </div>
 
         <div className="mt-7 flex flex-wrap gap-3">
-          <a
-            href={project.caseStudyUrl}
-            target="_blank"
-            rel="noreferrer"
-            className="btn-primary"
-          >
-            View on ATG
-          </a>
+          <Link to={href} className="btn-primary">
+            View project
+          </Link>
           {project.liveUrl ? (
             <a
               href={project.liveUrl}
@@ -144,6 +138,8 @@ const ProjectCard: React.FC<{ project: TProject; index: number }> = ({
   project,
   index,
 }) => {
+  const href = projectPath(project);
+
   return (
     <motion.article
       initial={{ y: 14 }}
@@ -152,12 +148,7 @@ const ProjectCard: React.FC<{ project: TProject; index: number }> = ({
       transition={{ duration: 0.4, delay: Math.min(index * 0.03, 0.18) }}
       className="group flex flex-col border-b border-line pb-8 sm:border-b-0 sm:pb-0"
     >
-      <a
-        href={project.caseStudyUrl}
-        target="_blank"
-        rel="noreferrer"
-        className="relative block overflow-hidden bg-stone-deep"
-      >
+      <Link to={href} className="relative block overflow-hidden bg-stone-deep">
         <img
           src={project.image}
           alt={project.name}
@@ -165,32 +156,25 @@ const ProjectCard: React.FC<{ project: TProject; index: number }> = ({
           decoding="async"
           className="aspect-[16/10] w-full object-cover transition duration-500 group-hover:scale-[1.04]"
         />
-      </a>
+      </Link>
       <p className="mt-4 text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-accent">
         {project.category}
       </p>
       <h3 className="display-font mt-2 text-[1.45rem] leading-tight text-ink">
-        <a
-          href={project.caseStudyUrl}
-          target="_blank"
-          rel="noreferrer"
-          className="transition hover:text-accent"
-        >
+        <Link to={href} className="transition hover:text-accent">
           {project.name}
-        </a>
+        </Link>
       </h3>
       <p className="mt-2 line-clamp-3 flex-1 text-[0.95rem] leading-relaxed text-muted">
         {project.description}
       </p>
       <div className="mt-4 flex flex-wrap gap-4 text-[0.8rem] font-semibold uppercase tracking-[0.12em]">
-        <a
-          href={project.caseStudyUrl}
-          target="_blank"
-          rel="noreferrer"
+        <Link
+          to={href}
           className="text-accent transition hover:text-accent-hover"
         >
-          Case study →
-        </a>
+          View project →
+        </Link>
         {project.liveUrl ? (
           <a
             href={project.liveUrl}
@@ -222,20 +206,18 @@ const Works = () => {
         <p className={`${styles.sectionBody} whitespace-pre-line`}>
           {config.sections.works.content}
         </p>
-        <a
-          href={agencyPortfolioUrl}
-          target="_blank"
-          rel="noreferrer"
+        <Link
+          to="/work"
           className="shrink-0 text-[0.8rem] font-semibold uppercase tracking-[0.14em] text-accent transition hover:text-accent-hover"
         >
-          Full ATG portfolio →
-        </a>
+          All work pages →
+        </Link>
       </div>
 
       <div className="mt-8 border-t border-line">
         {featured.map((project, index) => (
           <FeaturedProject
-            key={project.caseStudyUrl}
+            key={projectPath(project)}
             project={project}
             index={index}
           />
@@ -244,13 +226,15 @@ const Works = () => {
 
       <div className="mt-16">
         <p className={styles.sectionLabel}>More selected work</p>
-        <h3 className={`${styles.sectionHead} mt-3 text-[clamp(1.8rem,3vw,2.5rem)]`}>
+        <h3
+          className={`${styles.sectionHead} mt-3 text-[clamp(1.8rem,3vw,2.5rem)]`}
+        >
           Platforms across industries.
         </h3>
         <div className="mt-10 grid gap-x-8 gap-y-12 border-t border-line pt-10 sm:grid-cols-2 xl:grid-cols-3">
           {rest.map((project, index) => (
             <ProjectCard
-              key={project.caseStudyUrl}
+              key={projectPath(project)}
               project={project}
               index={index}
             />
@@ -264,18 +248,23 @@ const Works = () => {
             ATG Digital Agency
           </p>
           <p className="mt-2 max-w-xl text-[1.05rem] text-ink-soft">
-            Explore every case study, live product, and delivery story on the
-            agency site.
+            Explore every case study on the agency site — or browse indexable
+            project pages here.
           </p>
         </div>
-        <a
-          href={agencyPortfolioUrl}
-          target="_blank"
-          rel="noreferrer"
-          className="btn-primary"
-        >
-          See the work
-        </a>
+        <div className="flex flex-wrap gap-3">
+          <Link to="/work" className="btn-primary">
+            Browse /work
+          </Link>
+          <a
+            href={agencyPortfolioUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="btn-ghost"
+          >
+            ATG portfolio
+          </a>
+        </div>
       </div>
     </>
   );
