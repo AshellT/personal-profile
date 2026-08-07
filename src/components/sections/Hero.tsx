@@ -52,9 +52,7 @@ const Hero = () => {
             className="mt-10 flex flex-wrap items-center gap-3"
           >
             <a
-              href="https://www.atgdigitalagency.co.zw/portfolio"
-              target="_blank"
-              rel="noreferrer"
+              href="/work"
               className="btn-primary"
             >
               See the work
