@@ -111,7 +111,7 @@ const FeaturedProject: React.FC<{ project: TProject; index: number }> = ({
             rel="noreferrer"
             className="btn-primary"
           >
-            View case study
+            View on ATG
           </a>
           {project.liveUrl ? (
             <a

@@ -1,9 +1,16 @@
 import LegalPage from "../layout/LegalPage";
+import PageSEO from "../atoms/PageSEO";
 import { config } from "../../constants/config";
 
 const Terms = () => {
   return (
-    <LegalPage title="Terms of Use." updated="August 3, 2026">
+    <>
+      <PageSEO
+        title={`Terms of Use | ${config.html.fullName}`}
+        description="Terms of use for Ashell Tinotenda Gonese’s personal portfolio website and related project inquiries."
+        path="/terms"
+      />
+      <LegalPage title="Terms of Use." updated="August 3, 2026">
       <section>
         <h2 className="display-font text-[1.6rem] text-ink">Agreement</h2>
         <p className="mt-3">
@@ -93,6 +100,7 @@ const Terms = () => {
         </p>
       </section>
     </LegalPage>
+    </>
   );
 };
 

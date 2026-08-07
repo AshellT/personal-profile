@@ -73,6 +73,12 @@ src/
    - [Facebook Sharing Debugger](https://developers.facebook.com/tools/debug/)
    - [LinkedIn Post Inspector](https://www.linkedin.com/post-inspector/)
 
+## Search & analytics
+
+1. Add the site in [Google Search Console](https://search.google.com/search-console) and submit `https://ashelltinotenda.co.zw/sitemap.xml`.
+2. Optional: set `VITE_GA_MEASUREMENT_ID` in Vercel for traffic insights.
+3. After deploys that change the OG image, refresh caches in Facebook Sharing Debugger and LinkedIn Post Inspector.
+
 ## Scripts
 
 | Script | Description |
@@ -82,3 +88,4 @@ src/
 | `npm run preview` | Preview production build |
 | `npm run lint` | ESLint |
 | `npm run ts:check` | TypeScript only |
+

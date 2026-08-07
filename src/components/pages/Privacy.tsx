@@ -1,9 +1,16 @@
 import LegalPage from "../layout/LegalPage";
+import PageSEO from "../atoms/PageSEO";
 import { config } from "../../constants/config";
 
 const Privacy = () => {
   return (
-    <LegalPage title="Privacy Policy." updated="August 3, 2026">
+    <>
+      <PageSEO
+        title={`Privacy Policy | ${config.html.fullName}`}
+        description="How Ashell Tinotenda Gonese collects and uses information on this portfolio site and contact form."
+        path="/privacy"
+      />
+      <LegalPage title="Privacy Policy." updated="August 3, 2026">
       <section>
         <h2 className="display-font text-[1.6rem] text-ink">Overview</h2>
         <p className="mt-3">
@@ -100,6 +107,7 @@ const Privacy = () => {
         </p>
       </section>
     </LegalPage>
+    </>
   );
 };
 

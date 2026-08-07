@@ -23,7 +23,7 @@ export const clientQuotes: TClientQuote[] = [
 
 export const deliveryStats = [
   { label: "Selected projects", value: "24+" },
-  { label: "Live products", value: "4" },
+  { label: "Public live site", value: "1+" },
   { label: "Credentials", value: "40+" },
   { label: "Focus markets", value: "ZW + region" },
 ];
