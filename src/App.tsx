@@ -12,6 +12,7 @@ import { config } from "./constants/config";
 
 const Experience = lazy(() => import("./components/sections/Experience"));
 const Credentials = lazy(() => import("./components/sections/Credentials"));
+const Faq = lazy(() => import("./components/sections/Faq"));
 const Contact = lazy(() => import("./components/sections/Contact"));
 const Proof = lazy(() => import("./components/sections/Proof"));
 const Privacy = lazy(() => import("./components/pages/Privacy"));
@@ -37,6 +38,7 @@ const HomePage = () => (
       <Proof />
       <Experience />
       <Credentials />
+      <Faq />
       <Contact />
     </Suspense>
   </>

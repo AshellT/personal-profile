@@ -9,6 +9,8 @@ export { projects, agencyPortfolioUrl, projectSlug, getProjectBySlug, projectPat
 export { credentials } from "./credentials";
 export type { TCredential } from "./credentials";
 export { clientQuotes, deliveryStats } from "./proof";
+export { faqs } from "./faq";
+export type { TFaqItem } from "./faq";
 
 export const navLinks: TNavLink[] = [
   { id: "about", title: "About" },
@@ -16,8 +18,10 @@ export const navLinks: TNavLink[] = [
   { id: "proof", title: "Proof" },
   { id: "work", title: "Experience" },
   { id: "credentials", title: "Credentials" },
+  { id: "faq", title: "FAQ" },
   { id: "contact", title: "Contact" },
 ];
+
 
 const services: TService[] = [
   { title: "Full-Stack Product Engineering", icon: "" },
